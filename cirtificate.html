@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificates - Mrunali</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .logo span {
+            color: #e74c3c;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #555;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 0;
+        }
+        
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #e74c3c;
+        }
+        
+        nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #e74c3c;
+            border-radius: 2px;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c3e50;
+        }
+        
+        /* Page Content */
+        .page-content {
+            display: none;
+            padding: 120px 0 50px;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .page-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background-color: #e74c3c;
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            font-size: 16px;
+            color: #777;
+            margin-top: 15px;
+        }
+        
+        /* Certificates Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+        
+        .project-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.7s ease forwards;
+            opacity: 0;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:nth-child(6) { animation-delay: 0.6s; }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background: #e74c3c;
+            transition: height 0.5s ease;
+            z-index: 1;
+        }
+        
+        .project-card:hover::before {
+            height: 100%;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-img img {
+            transform: scale(1.05);
+        }
+        
+        .project-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .project-card:hover .project-img::after {
+            opacity: 1;
+        }
+        
+        .project-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-info h3 {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .project-info p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #e74c3c;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            align-self: flex-start;
+        }
+        
+        .btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .designer-credit {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #999;
+            font-style: italic;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Certificate Modal Styles */
+        .certificate-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            overflow: auto;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .certificate-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            width: 800px;
+            animation: modalFadeIn 0.4s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from { 
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .certificate-image-container {
+            overflow: auto;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+            background: #f9f9f9;
+            min-height: 400px;
+        }
+        
+        .certificate-image-container img {
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #eee;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.7);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .close-modal:hover {
+            background: rgba(231, 76, 60, 0.9);
+            transform: rotate(90deg);
+        }
+        
+        .certificate-details {
+            padding: 20px;
+            background: #fff;
+            border-top: 1px solid #eee;
+        }
+        
+        .certificate-details h3 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .certificate-details p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        /* Loading animation for certificate */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            width: 100%;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #e74c3c;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: #fff;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-container {
+                padding: 15px 0;
+            }
+            
+            .page-content {
+                padding: 100px 0 30px;
+            }
+            
+            .modal-content {
+                max-width: 95%;
+                max-height: 95%;
+            }
+            
+            .certificate-image-container {
+                padding: 10px;
+                min-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">MRUNALI<span>.</span></div>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="./index.html" class="nav-link">Home</a></li>
+                    <li><a href="./about.html" class="nav-link">About</a></li>
+                    <li><a href="./resume.html" class="nav-link">Resume</a></li>
+                    <li><a href="./sirvice.html" class="nav-link">Services</a></li>
+                    <li><a href="./project.html" class="nav-link">Projects</a></li>
+                    <li><a href="./cirtificate.html" class="nav-link active">Certificate</a></li>
+                    <li><a href="./contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-btn" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Certificate Page -->
+    <section id="certificate" class="page-content active">
+        <div class="container">
+            <div class="section-title">
+                <h2>My Certificates</h2>
+                <p>Professional certifications and achievements</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="assets/WhatsApp Image 2025-09-18 at 11.29.40_60ffcbcf.jpg" alt="Certificate 1">
+                    </div>
+                    <div class="project-info">
+                        <h3>industrial traning Certification</h3>
+                        <p>30 days industrial traning-ultratech cement limited,awarpur (aug-sep2024)</p>
+                        <button class="btn view-certificate" data-image="assets/WhatsApp Image 2025-09-18 at 11.29.40_60ffcbcf.jpg" data-title="industrial traning Certification" data-description="30 days industrial traning-ultratech cement limited,awarpur (aug-sep2024)">View Certificate</button>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="assets/WhatsApp Image 2025-09-18 at 11.29.41_6c59e51a.jpg" alt="Certificate 2">
+                    </div>
+                    <div class="project-info">
+                        <h3>ms-cit Certification</h3>
+                        <p>ms-cit certification gaining knowledge of computer fundamentals, ms office internet usage and basic it tools.</p>
+                        <button class="btn view-certificate" data-image="assets/WhatsApp Image 2025-09-18 at 11.29.41_6c59e51a.jpg" data-title="ms-cit certification gaining knowledge of computer fundamentals, ms office internet usage and basic it tools">View Certificate</button>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="assets/WhatsApp Image 2025-09-18 at 11.29.41_d8a52af4.jpg" alt="Certificate 3">
+                    </div>
+                    <div class="project-info">
+                        <h3>mkcl intern Certification</h3>
+                        <p>enhanced teamwork, communication, and problem solving skills.</p>
+                        <button class="btn view-certificate" data-image="assets/WhatsApp Image 2025-09-18 at 11.29.41_d8a52af4.jpg" data-title="mkcl intern Certification" data-description="enhanced teamwork, communication, and problem solving skills.">View Certificate</button>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="assets/WhatsApp Image 2025-09-18 at 11.29.41_f37ac956.jpg" alt="Certificate 4">
+                    </div>
+                    <div class="project-info">
+                        <h3>CSMS-DEEP sarthi Certification</h3>
+                        <p>traning in english language, communication skills,and soft skills.</p>
+                        <button class="btn view-certificate" data-image="assets/WhatsApp Image 2025-09-18 at 11.29.41_f37ac956.jpg" data-title="CSMS-DEEP sarthi Certification" data-description="traning in english language, communication skills,and soft skills.">View Certificate</button>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="assets/WhatsApp Image 2025-09-18 at 11.29.42_4471c798.jpg" alt="Certificate 5">
+                    </div>
+                    <div class="project-info">
+                        <h3>hands-on circuit design workshop Certification</h3>
+                        <p>gained hands-on experience in designing and implementing electronic circuits.</p>
+                        <button class="btn view-certificate" data-image="assets/WhatsApp Image 2025-09-18 at 11.29.42_4471c798.jpg" data-title="hands-on circuit design workshop Certification" data-description="gained hands-on experience in designing and implementing electronic circuits.">View Certificate</button>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="assets/WhatsApp Image 2025-09-18 at 11.29.43_07c1272f.jpg" alt="Certificate 6">
+                    </div>
+                    <div class="project-info">
+                        <h3>intership traning on fundamentals of programming & web devlopment cirtification</h3>
+                        <p>developed skills in building and deploying basic web applicatons.</p>
+                        <button class="btn view-certificate" data-image="assets/WhatsApp Image 2025-09-18 at 11.29.43_07c1272f.jpg" data-title="intership traning on fundamentals of programming & web devlopment cirtification" data-description="developed skills in building and deploying basic web applicatons.">View Certificate</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="designer-credit">
+                <p>Designed by MRUNALI WANDHARE</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Modal -->
+    <div class="certificate-modal" id="certificate-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <div class="certificate-image-container" id="certificate-image-container">
+                <div class="loading" id="image-loading">
+                    <div class="spinner"></div>
+                </div>
+                <img id="modal-image" src="" alt="Certificate" style="display: none;">
+            </div>
+            <div class="certificate-details">
+                <h3 id="modal-title"></h3>
+                <p id="modal-description"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('nav-menu').classList.remove('active');
+            });
+        });
+        
+        // Certificate modal functionality
+        const modal = document.getElementById('certificate-modal');
+        const modalImage = document.getElementById('modal-image');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const closeModal = document.getElementById('close-modal');
+        const imageLoading = document.getElementById('image-loading');
+        const certificateContainer = document.getElementById('certificate-image-container');
+        
+        // Open modal when clicking on view certificate buttons
+        document.querySelectorAll('.view-certificate').forEach(button => {
+            button.addEventListener('click', function() {
+                const imageUrl = this.getAttribute('data-image');
+                const title = this.getAttribute('data-title');
+                const description = this.getAttribute('data-description');
+                
+                // Show loading spinner
+                imageLoading.style.display = 'flex';
+                modalImage.style.display = 'none';
+                
+                // Set certificate details
+                modalTitle.textContent = title;
+                modalDescription.textContent = description;
+                
+                // Load image
+                modalImage.src = imageUrl;
+                modalImage.alt = title;
+                
+                // Show modal
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+                
+                // When image is loaded
+                modalImage.onload = function() {
+                    imageLoading.style.display = 'none';
+                    modalImage.style.display = 'block';
+                };
+                
+                // If image fails to load
+                modalImage.onerror = function() {
+                    imageLoading.style.display = 'none';
+                    certificateContainer.innerHTML = '<p style="color: #e74c3c; font-weight: 500;">Error loading certificate image. Please try again.</p>';
+                };
+            });
+        });
+        
+        // Close modal when clicking on close button
+        closeModal.addEventListener('click', function() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        });
+        
+        // Close modal when clicking outside the modal content
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            }
+        });
+    </script>
+</body>
+</html>
